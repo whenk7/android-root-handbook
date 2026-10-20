@@ -252,6 +252,15 @@ susfs 是 kernel patch，**跟内核版本强绑定**。内核升级可能要重
 
 ---
 
+## 🧰 同类 / 互补工具
+
+- **[PathMask](https://github.com/Andrea-lyz/LKM-PathMask)**：LKM 形态的路径隐藏，带"隔离防护（procguard）"——KSU LKM 模式下没编译 susfs 时的替代
+- **[NoMount](https://github.com/maxsteeel/nomount)**：内核 VFS 路径重定向框架，按元模块方式工作
+- **[FuseFixer](https://github.com/5ec1cff/FuseFixer)**：修 FUSE 的零宽读取探测（App 用 0 长度 read 探挂载痕迹）
+- **[Inode-Hijacker](https://github.com/YiJieqwq/Inode-Hijacker/releases)**：把 `/data/local/tmp` 的 inode 编号伪装回正常范围。副作用：用后有线投屏（Scrcpy 等）可能挂，执行 `su -c restorecon -RF /data/local/tmp` 恢复
+
+---
+
 ## 📚 资料来源
 
 - [susfs4ksu 仓库](https://gitlab.com/simonpunk/susfs4ksu)

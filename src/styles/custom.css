@@ -19,3 +19,35 @@
 .sl-markdown-content table td {
 	padding: 0.5rem 0.75rem;
 }
+
+/* ---- 首页 Hero 收紧（覆盖 Galaxy 主题，视觉风格不变，只压缩留白） ---- */
+/* 注意：Galaxy 主题 CSS 在打包时排在 custom.css 之后，同优先级会被它盖掉，
+   所以全部用 [data-has-hero] 前缀提高优先级（该属性只在带 hero 的首页上存在） */
+[data-has-hero] .hero {
+	min-height: auto; /* 原为 min(75vh, 600px)，一屏大半是空白 */
+	gap: clamp(1.25rem, 3vw, 2rem);
+	padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 4vw, 3rem);
+	margin-top: 0;
+}
+[data-has-hero] .hero .stack {
+	gap: clamp(0.75rem, 2vw, 1.25rem);
+}
+[data-has-hero] .hero [data-page-title] {
+	font-size: clamp(2rem, 4vw, 2.75rem); /* 原上限 3.5rem */
+	margin-bottom: 0.25rem;
+}
+[data-has-hero] .hero .tagline {
+	font-size: clamp(1rem, 1.5vw, 1.15rem);
+	margin-bottom: 0.25rem;
+	margin-inline: 0; /* 跟随正文左对齐，不再居中漂移 */
+}
+[data-has-hero] .hero .actions .action {
+	padding: 0.6rem 1.4rem;
+	font-size: 0.9rem;
+}
+/* 没有 hero 配图，桌面端不留空着的第二列 */
+@media (min-width: 72rem) {
+	[data-has-hero] .hero {
+		grid-template-columns: 1fr;
+	}
+}

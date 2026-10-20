@@ -75,7 +75,9 @@ title: "KSU 元模块（Metamodule）"
 
 ### 其他
 
-社区可能有 FUSE-based、EROFS-based 的实验性 metamodule。
+- **[Hybrid-Mount](https://github.com/Hybrid-Mount/meta-hybrid_mount)**：使用较广的第三方元模块——撞挂载类检测过不去时，可以换它试试
+- **[NoMount](https://github.com/maxsteeel/nomount)**：VFS 路径重定向框架，按元模块方式工作
+- 社区还有 FUSE-based、EROFS-based 的实验性 metamodule
 
 ---
 

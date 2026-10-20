@@ -65,6 +65,11 @@ title: "Root 方案有哪些（横向对比）"
 - 社区相对小
 - 兼容性不如 KSU
 
+**生态工具**：
+- [NoHello.kpm](https://t.me/welikeandroid)：防侧信道检测的 KPM 模块
+- [SELinux_Hook.kpm](https://t.me/APatch_nightly)：SELinux hook（新版管理器可能已内置，需手动开启）
+- [Aster](https://github.com/LyraVoid/Aster)：FolkPatch 作者的 APatch 系新管理器，界面现代、改动克制
+
 ---
 
 ## 📊 横向对比

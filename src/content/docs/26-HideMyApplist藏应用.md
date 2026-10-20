@@ -10,7 +10,11 @@ title: "Hide My Applist 藏应用"
 
 **HMA** 是一个 LSP 模块，hook `PackageManager` 的所有查询 API，让目标 App 看到的"应用列表"是你过滤后的版本。
 
+除了藏应用，**HMA 也能藏 prop（系统属性）**——检测方读属性时拿到的同样是过滤后的结果。
+
 **仓库**：`Dr-TSNG/Hide-My-Applist`
+
+> 没装 LSPosed 的环境可以改用 **HMA-OSS**（[`frknkrc44/HMA-OSS`](https://github.com/frknkrc44/HMA-OSS)）——同一思路的 Zygisk 版 fork，不依赖 LSPosed。
 
 ---
 
@@ -109,17 +113,11 @@ App 不声明这个权限，**默认只能看到部分应用**。
 - ...
 ```
 
-#### 第 3 步：选拦截方法
+#### 第 3 步：不用选拦截方法
 
-HMA 可以拦截这些 API：
-- `getInstalledApplications`（列出所有应用）
-- `getInstalledPackages`
-- `getPackageInfo`
-- `getApplicationInfo`
-- `queryIntentActivities`
-- ...
+**HMA 默认拦截全部查询方式**（`getInstalledApplications`、`getPackageInfo`、`queryIntentActivities` 等等），不需要你手动勾选任何"拦截方法"。
 
-**默认全选**就行。
+整个配置只有两件事：**模板里放"要藏谁"** + **把模板应用到"对谁生效的 App"**。配完即全方法生效。
 
 ---
 
@@ -153,7 +151,7 @@ HMA 可以拦截这些 API：
 
 ### 1. 不是万能
 
-HMA 只能拦 `PackageManager` API。**不能拦**：
+HMA 管的是 **PackageManager 查询和 prop 属性读取**。**不能拦**：
 - 文件存在性探测（`new File(...).exists()`）
 - `/proc/<pid>/cmdline` 遍历
 
@@ -165,13 +163,17 @@ HMA 只能拦 `PackageManager` API。**不能拦**：
 
 ### 3. 部分 App 会"扫描包名"
 
-有些 App 不用 PackageManager，直接试 `pm.getPackageInfo("已知包名", 0)` 看会不会抛异常。HMA 也能拦这个，但**要确保你拦截了 getPackageInfo**。
+有些 App 不用 PackageManager，直接试 `pm.getPackageInfo("已知包名", 0)` 看会不会抛异常。HMA 默认全方法拦截，**这种点名的包名查询也包含在内**，不用额外设置。
 
 ### 4. HMA 自己也得藏
 
 银行 App 可能扫"HMA 装没装"。所以：
 - 把 HMA 自己加进黑名单模板
 - 或者用 ZygiskNext + HMA 配合
+
+### 5. Vold 应用数据隔离会留属性痕迹
+
+HMA 的"Vold appdata 隔离"功能会写入系统属性 `persist.sys.vold_app_data_isolation_enabled`——**这个属性本身会被检测方读取**，等于自曝"我在藏东西"。撞到这类检测时，把这个开关关掉。
 
 ---
 
@@ -256,4 +258,8 @@ bin.mt.plus                     ← MT 管理器
 ## 📚 资料来源
 
 - [Hide My Applist 仓库](https://github.com/Dr-TSNG/Hide-My-Applist)
+- [HMA-OSS（Zygisk 版 fork）](https://github.com/frknkrc44/HMA-OSS)
+- [HMA 官方更新频道（Telegram）](https://t.me/HideMyApplist/175)
+- [HMA-OSS 更新频道（Telegram）](https://t.me/buggychat/121613)
+- [主流检测器逐项应对方案汇总（社区实测）](https://github.com/mingzun09/Chunqiu-Detector-Problem-solution)——撞检测时逐条对照查
 - [Android 11 应用可见性](https://developer.android.com/training/package-visibility)

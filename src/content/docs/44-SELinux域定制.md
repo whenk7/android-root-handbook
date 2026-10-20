@@ -251,3 +251,4 @@ allow myapp shell_data_file:file read;
 - [KernelSU app-profile.md](https://github.com/tiann/KernelSU/blob/main/website/docs/zh_CN/guide/app-profile.md)
 - [SELinux 官方文档（红帽）](https://www.redhat.com/en/topics/linux/what-is-selinux)
 - [ArchWiki SELinux](https://wiki.archlinux.org/title/SELinux)
+- [DirtySepolicy（LSPosed 官方的动态 sepolicy 注入示例）](https://github.com/LSPosed/DirtySepolicy)

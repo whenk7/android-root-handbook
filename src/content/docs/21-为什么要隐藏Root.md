@@ -140,6 +140,18 @@ IntegrityManagerFactory.create(context).requestIntegrityToken(...);
 
 **对策**：Play Integrity Fix 模块伪造指纹。
 
+### 检测维度 11：挂载信息交叉验证
+
+抽样读 `/proc/*/fdinfo` 里的 mnt_id，和挂载视图对账——被你藏掉的挂载，可能在 fdinfo 里露馅。
+
+**对策**：换挂载一致性更好的元模块（见 [susfs 与内核层隐藏](/android-root-handbook/23-susfs与内核层隐藏/)）。
+
+### 检测维度 12：密钥证明链校验
+
+对 keystore 签出的证书链做几十项一致性检查（密钥用途、签名算法、补丁日期标签……），伪装总会在某一项露馅。
+
+**对策**：密钥模块（见 [Play Integrity 过检测](/android-root-handbook/27-playintegrity过检测/)）。
+
 ---
 
 ## 🛡️ 对应防御策略（三层体系，2026 版）
@@ -215,6 +227,10 @@ Play Integrity    →   App 层        →   Play Integrity Fix
 ### 工具 3：Momo（国内常用）
 
 第三方检测工具，专门测各种反 root 检测。
+
+### 工具 4：高强度检测器（进阶）
+
+Momo 之外还有检测项上百个的检测器，配合[社区实测的逐项应对方案](https://github.com/mingzun09/Chunqiu-Detector-Problem-solution)逐条对照排查——能过它，银行 App 基本就稳了。
 
 ### 实测：直接打开银行 App
 

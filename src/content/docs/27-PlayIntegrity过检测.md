@@ -111,6 +111,44 @@ PIF 需要"设备指纹"——一个真实存在的、未 root 的 Pixel 设备�
 
 ---
 
+## 🔑 密钥模块：过 STRONG 的关键
+
+### PIF 的局限
+
+PIF 伪造的是**软件层指纹**。Google 加强检测后，还会校验 **TEE / KeyMint 的密钥证明（key attestation）**——bootloader 解锁后，TEE 会如实上报"已解锁"，光改指纹救不了。
+
+### 原理
+
+密钥模块在 **TEE / KeyMint 层面拦截密钥证明请求**，用一份真实有效的 **keybox（设备密钥证书）**替你的设备"作证"：
+
+```
+App 请求密钥证明
+   ↓
+密钥模块拦截 → 用 keybox 生成"bootloader 已锁定"的证明
+   ↓
+Google 校验通过 → DEVICE / STRONG INTEGRITY ✅
+```
+
+### 主流选择（2026）
+
+- **TEESimulator-RS**（[`Enginex0/TEESimulator-RS`](https://github.com/Enginex0/TEESimulator-RS)）：目前更新最勤的主流
+- **OhMyKeymint**（[`qwq233/OhMyKeymint`](https://github.com/qwq233/OhMyKeymint/)）：行为更接近 AOSP；要 WebUI 用 [ITxiao6666 的分支](https://github.com/ITxiao6666/OhMyKeymint)
+- **Tricky-addon-Enhanced**（[`Enginex0/tricky-addon-enhanced`](https://github.com/Enginex0/tricky-addon-enhanced)）：给密钥模块补 WebUI 的拓展
+
+> 原版 TrickyStore 已停更（2025-11 起），不建议新装。
+
+### 配置三件套
+
+1. 把目标 App 加进密钥模块的包名列表
+2. 放好 keybox 文件；安全补丁日期建议直接删掉对应配置文件，用默认行为
+3. **boot hash**：真解锁设备的 boot hash 会变成全 0，一眼假——用 [Native Detector](https://t.me/rootdetector/49) 读出正确值，在密钥模块里配上
+
+### keybox 从哪来
+
+属于灰色资源，这里不提供，自己找。注意：**流传太广的 keybox 会被 Google 吊销**——失效是常态，失效就换。
+
+---
+
 ## 🧪 测试
 
 ### 工具 1：Play Integrity API Checker
@@ -154,9 +192,9 @@ Google 会**不断更新检测**：
 
 乱编一个指纹会被识别。要用真实 Pixel 的指纹。
 
-### 3. STRONG_INTEGRITY 难
+### 3. STRONG_INTEGRITY 要靠密钥模块
 
-`MEETS_STRONG_INTEGRITY` 要求**硬件级密钥**——root 后基本拿不到。
+`MEETS_STRONG_INTEGRITY` 要求**硬件级密钥证明**——光 PIF 不够，要配上文说的**密钥模块 + 有效 keybox**。
 
 **好消息**：大部分 App 不要求 STRONG，只要求 BASIC 或 DEVICE。
 
@@ -220,3 +258,5 @@ PIF 只解决"Play Integrity 检测"，**不解决其他检测**：
 - [Play Integrity API 官方文档](https://developer.android.com/google/play/integrity)
 - [PlayIntegrityFix 仓库](https://github.com/chiteroman/PlayIntegrityFix)
 - [Play Integrity Fork（osm0sis）](https://github.com/osm0sis/PlayIntegrityFork)
+- [TEESimulator-RS（密钥模块）](https://github.com/Enginex0/TEESimulator-RS)
+- [OhMyKeymint（密钥模块）](https://github.com/qwq233/OhMyKeymint/)

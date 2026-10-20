@@ -37,6 +37,7 @@ title: "SukiSU 和其他分支"
    - KPM = KernelPatch Module
    - 可以加载 APatch 风格的内核模块
    - 兼容部分 APatch 生态
+   - 常用 KPM 举例：[NoHello.kpm](https://t.me/welikeandroid)（防侧信道）、[SELinux_Hook.kpm](https://t.me/APatch_nightly)（SELinux hook）
 
 3. **susfs 集成**
    - 官方 KSU 要自己装 susfs

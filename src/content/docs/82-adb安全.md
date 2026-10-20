@@ -63,6 +63,10 @@ $ su
 插 USB 时选"仅充电"
 ```
 
+### 6. 用完擦除调试痕迹
+
+"USB 调试已开启"本身就是检测项，调试还会在系统里留下痕迹（授权记录、临时文件）。用完 adb 可以跑一遍痕迹清理脚本（如 [ADB-Trace-Cleaner](https://github.com/YiJieqwq/ADB-Trace-Cleaner/releases)）。
+
 ---
 
 ## 🔍 检查 adb 授权
