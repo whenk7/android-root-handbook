@@ -17,8 +17,8 @@ export default defineConfig({
 				root: { label: '简体中文', lang: 'zh-CN' },
 			},
 			logo: {
-				src: './src/assets/logo.svg',
-				alt: 'Android Root 手册 Logo',
+				src: './src/assets/avatar.png',
+				alt: 'whenk7 的头像',
 			},
 			// 浏览器标签页图标直接用 GitHub 头像:改头像后无需重新部署,缓存过期即自动更新
 			favicon: 'https://github.com/whenk7.png',

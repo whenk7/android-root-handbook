@@ -20,6 +20,11 @@
 	padding: 0.5rem 0.75rem;
 }
 
+/* 左上角站点 logo 是 GitHub 头像，裁成圆形 */
+.site-title img {
+	border-radius: 50%;
+}
+
 /* ---- 首页 Hero 收紧（覆盖 Galaxy 主题，视觉风格不变，只压缩留白） ---- */
 /* 注意：Galaxy 主题 CSS 在打包时排在 custom.css 之后，同优先级会被它盖掉，
    所以全部用 [data-has-hero] 前缀提高优先级（该属性只在带 hero 的首页上存在） */
