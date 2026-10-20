@@ -1,0 +1,6 @@
+id=load_kernel_module
+name=Load Kernel Module
+version=v1
+versionCode=1
+author=handbook
+description=在 SELinux 加载前加载一个 .ko 内核模块

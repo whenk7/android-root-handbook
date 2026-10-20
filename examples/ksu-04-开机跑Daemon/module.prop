@@ -1,0 +1,6 @@
+id=my_daemon
+name=My Daemon
+version=v1
+versionCode=1
+author=handbook
+description=开机后跑一个心跳 daemon

@@ -1,0 +1,23 @@
+127.0.0.1 localhost
+::1 localhost
+
+# ===== 广告域名 =====
+127.0.0.1 ads.google.com
+127.0.0.1 ad.doubleclick.net
+127.0.0.1 googlesyndication.com
+127.0.0.1 adservice.google.com
+127.0.0.1 pagead2.googlesyndication.com
+
+# 国内广告
+127.0.0.1 ad.xiaomi.com
+127.0.0.1 union.mi.com
+127.0.0.1 adv.sec.miui.com
+127.0.0.1 tracking.miui.com
+
+# 数据追踪
+127.0.0.1 umeng.com
+127.0.0.1 umeng.co
+127.0.0.1 umengcloud.com
+
+# 自行添加
+# 127.0.0.1 your-ad-domain.com

@@ -1,0 +1,6 @@
+id=adblock_hosts
+name=AdBlock Hosts
+version=v1
+versionCode=1
+author=handbook
+description=改 /system/etc/hosts 屏蔽广告域名

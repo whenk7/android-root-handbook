@@ -1,0 +1,6 @@
+id=my_initrc
+name=Init RC Service Injection
+version=v1
+versionCode=1
+author=handbook
+description=通过 initrc 注册一个系统服务
