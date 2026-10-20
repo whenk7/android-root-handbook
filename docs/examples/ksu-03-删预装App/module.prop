@@ -1,0 +1,6 @@
+id=remove_bloatware
+name=Remove Bloatware Apps
+version=v1
+versionCode=1
+author=handbook
+description=删除系统预装 App（用 whiteout 机制）

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:label="@string/app_name"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        
+        <!-- 告诉 LSPosed 这是 Xposed 模块 -->
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true"/>
+        
+        <!-- 模块描述 -->
+        <meta-data
+            android:name="xposeddescription"
+            android:value="最简单的 LSP 模块示例"/>
+        
+        <!-- 兼容的最小 Xposed 版本 -->
+        <meta-data
+            android:name="xposedminversion"
+            android:value="93"/>
+        
+        <!-- 作用域 -->
+        <meta-data
+            android:name="xposedscope"
+            android:resource="@array/xposed_scope"/>
+        
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

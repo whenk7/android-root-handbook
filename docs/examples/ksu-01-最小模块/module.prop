@@ -1,0 +1,6 @@
+id=my_first
+name=My First Module
+version=v1
+versionCode=1
+author=handbook
+description=最简单的 KSU 模块，开机后写一行日志
