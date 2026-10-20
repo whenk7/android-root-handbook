@@ -1,0 +1,135 @@
+---
+title: 首页
+description: 给半新手的玩机指南 — KernelSU / SukiSU / LSPosed / Zygisk / susfs / HMA / PIF
+template: splash
+hero:
+  tagline: 给半新手的「看得懂、用得上」的玩机指南。从 KernelSU / SukiSU / LSPosed / Xposed / Zygisk / susfs / ZygiskNext / HMA 一路讲清。
+  actions:
+    - text: 开始阅读
+      link: /android-root-handbook/01-名词宇宙/
+      icon: right-arrow
+      variant: primary
+    - text: 30 秒决策树
+      link: '#30-秒决策树新手先看这'
+      icon: approve-check
+    - text: GitHub
+      link: https://github.com/whenk7/android-root-handbook
+      icon: external
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 🎯 这本手册适合谁
+
+- ✅ 已经解锁 BL、刷好 KernelSU / SukiSU 的玩家
+- ✅ 装过几个模块但概念模糊（分不清 Zygisk 和 LSPosed 是啥关系）
+- ✅ 想自己写简单模块但不知道从何下手
+- ✅ 撞坑之后不知道去哪查（银行 App 闪退、OTA 后 root 没了、模块不工作…）
+- ❌ 还没解锁 BL / 完全没碰过 root 的纯小白（先随便刷一次再回来看）
+- ❌ 想看内核源码级深度原理的（本手册点到为止）
+
+## 📖 学习路径：九个阶段
+
+<CardGrid stagger>
+	<Card title="第一阶段 · 基础概念" icon="open-book">
+		**必读**。所有名词一张表、启动流程、目录分区、挂载覆盖、权限 SELinux、进程注入。
+
+		[从「名词宇宙」开始 →](/android-root-handbook/01-名词宇宙/)
+	</Card>
+	<Card title="第二阶段 · 方案" icon="rocket">
+		KSU / Magisk / APatch 对比，Xposed → LSPosed 演化史，Zygisk 注入原理，LSPatch 无 Root 方案。
+
+		[Root 方案有哪些 →](/android-root-handbook/11-root方案有哪些/)
+	</Card>
+	<Card title="第三阶段 · 隐藏 Root" icon="shield">
+		被银行 App 检测再看：三层防御体系、susfs、prop 隐藏、HMA、Play Integrity。
+
+		[为什么要隐藏 Root →](/android-root-handbook/21-为什么要隐藏root/)
+	</Card>
+	<Card title="第四阶段 · 用现成模块" icon="puzzle">
+		KSU 模块 vs LSP 模块、决策树、模块从哪找、安全注意事项。
+
+		[KSU 模块是什么 →](/android-root-handbook/31-ksu模块是什么/)
+	</Card>
+	<Card title="第五阶段 · App Profile" icon="setting">
+		KSU 独有的精细控制：把 root 关进笼子——UID / Capabilities / SELinux 域 / 防逃逸。
+
+		[App Profile 是什么 →](/android-root-handbook/41-appprofile是什么/)
+	</Card>
+	<Card title="第六阶段 · OTA 与备份" icon="document">
+		A/B 槽原理、保 Root 升级、该备份什么、降级解锁升级链路。
+
+		[AB 槽与无缝更新 →](/android-root-handbook/51-ab槽与无缝更新/)
+	</Card>
+	<Card title="第七阶段 · 写模块" icon="code">
+		自己动手：KSU 模块开发、启动脚本、WebUI；LSP 模块开发、核心 API、踩坑指南。
+
+		[KSU 模块开发入门 →](/android-root-handbook/61-ksu模块开发入门/)
+	</Card>
+	<Card title="第八阶段 · 救砖与排查" icon="warning">
+		撞坑再来：开不了机、模块不工作、App 闪退、SELinux 拒绝、OTA 后丢 Root。
+
+		[开不了机怎么办 →](/android-root-handbook/71-开不了机怎么办/)
+	</Card>
+	<Card title="第九阶段 · 安全与信任" icon="approve-check">
+		第三方 Fork 的风险、adb 安全、模块可信度判断。
+
+		[第三方 Fork 的风险 →](/android-root-handbook/81-第三方fork的风险/)
+	</Card>
+	<Card title="速查表" icon="magnifier">
+		[常用路径](/android-root-handbook/cheatsheets/常用路径/) · [常用命令](/android-root-handbook/cheatsheets/常用命令/) · [救砖速查](/android-root-handbook/cheatsheets/救砖速查/) · [名词速查](/android-root-handbook/cheatsheets/名词速查/) · [决策树](/android-root-handbook/cheatsheets/决策树/)
+	</Card>
+	<Card title="实战示例代码" icon="code">
+		6 个 KSU 模块 + 6 个 LSP 模块，每个都能直接跑。
+
+		[Examples 索引 →](/android-root-handbook/examples/)
+	</Card>
+	<Card title="FAQ" icon="information">
+		高频问题汇总，先搜这里。
+
+		[常见问题 →](/android-root-handbook/90-faq/)
+	</Card>
+</CardGrid>
+
+## 30 秒决策树（新手先看这）
+
+### 我该用 KSU 还是 LSP 改东西？
+
+```text
+要改的东西在哪一层？
+│
+├─ 改文件系统（删预装 App、改 hosts、改字体、改 build.prop）
+│     → 用 KSU 模块
+│
+├─ 改内核 / 加载 .ko / 改 SELinux / 改 init.rc
+│     → 用 KSU 模块
+│
+├─ 改某个 App 内部的 Java 方法（去广告、防撤回、解锁会员）
+│     → 用 LSP 模块
+│
+├─ 要 hook 多个 App 的同一种方法
+│     → 用 LSP 模块（一个模块勾选多个作用域）
+│
+└─ 在 App 启动前拦截（改 ClassLoader、绕签名校验）
+      → 用 LSP 模块
+```
+
+**口诀**：KSU 改「环境」（文件、内核、init），LSP 改「行为」（Java 方法）。
+
+### 我该装哪些模块？（2026 版）
+
+| 需求 | 推荐 |
+|---|---|
+| 只用 root 改系统 | KSU + meta-overlayfs |
+| 还要 hook App | + ZygiskNext v1.3.0+ + LSPosed |
+| 还要过银行 App 检测 | + susfs（SukiSU 已集成）+ prop 隐藏（见 [prop 隐藏](/android-root-handbook/25-prop隐藏/)） |
+| 还要防应用列表被扫 | + Hide My Applist |
+| 还要过 Google Play 完整性 | + Play Integrity Fix |
+
+## 📚 参考资料
+
+[KernelSU](https://github.com/tiann/KernelSU) · [SukiSU-Ultra](https://github.com/SukiSU-Ultra/SukiSU-Ultra) · [LSPosed](https://github.com/LSPosed/LSPosed) · [ZygiskNext](https://github.com/Dr-TSNG/ZygiskNext) · [Hide My Applist](https://github.com/Dr-TSNG/Hide-My-Applist) · [Play Integrity Fix](https://github.com/chiteroman/PlayIntegrityFix)
+
+---
+
+MIT License · 欢迎提 [Issue / PR](https://github.com/whenk7/android-root-handbook/issues)

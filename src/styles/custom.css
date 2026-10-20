@@ -1,0 +1,21 @@
+/* 全站中文字体栈：不依赖 Google Fonts，直接用各平台自带的优质中文字体 */
+:root {
+	--sl-font:
+		-apple-system, BlinkMacSystemFont, 'PingFang SC', 'HarmonyOS Sans SC',
+		'MiSans', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Source Han Sans SC',
+		'Segoe UI', Roboto, sans-serif;
+	--sl-font-mono:
+		'Sarasa Mono SC', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo,
+		Consolas, 'Liberation Mono', monospace;
+}
+
+/* 中文排版微调：正文行距与段距 */
+.sl-markdown-content {
+	line-height: 1.85;
+}
+
+/* 表格：中文长内容下更透气 */
+.sl-markdown-content table th,
+.sl-markdown-content table td {
+	padding: 0.5rem 0.75rem;
+}
